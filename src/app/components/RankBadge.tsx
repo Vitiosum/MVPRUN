@@ -102,13 +102,20 @@ export function RankBadge({ rank, size = 'large' }: RankBadgeProps) {
 
   return (
     <div className="flex flex-col items-center gap-6 p-8">
-      <div 
-        className={`relative w-32 h-32 rounded-full flex items-center justify-center bg-gradient-to-br ${config.bgGradient} shadow-2xl`}
-        style={{ 
-          boxShadow: `0 0 50px ${config.color}40, 0 0 100px ${config.color}20`
-        }}
-      >
-        <Icon size={64} className="text-white drop-shadow-lg" />
+      <div className="relative">
+        {/* Pulsing ring */}
+        <div
+          className="absolute inset-0 rounded-full animate-ping opacity-20"
+          style={{ backgroundColor: config.color }}
+        />
+        <div
+          className={`relative w-32 h-32 rounded-full flex items-center justify-center bg-gradient-to-br ${config.bgGradient} shadow-2xl animate-in zoom-in duration-500`}
+          style={{
+            boxShadow: `0 0 50px ${config.color}40, 0 0 100px ${config.color}20`,
+          }}
+        >
+          <Icon size={64} className="text-white drop-shadow-lg" />
+        </div>
       </div>
       
       <div className="text-center space-y-2">

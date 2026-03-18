@@ -80,6 +80,22 @@ export function calculatePercentile(distanceKm: number, timeMinutes: number): nu
   return 85;                            // Top 85%+
 }
 
+// Next rank info: target pace to reach the next rank
+const nextRankThresholds: Partial<Record<RankType, { rank: RankType; targetPace: string }>> = {
+  Iron:        { rank: 'Bronze',      targetPace: '7:30' },
+  Bronze:      { rank: 'Silver',      targetPace: '6:30' },
+  Silver:      { rank: 'Gold',        targetPace: '5:30' },
+  Gold:        { rank: 'Platinum',    targetPace: '5:00' },
+  Platinum:    { rank: 'Diamond',     targetPace: '4:30' },
+  Diamond:     { rank: 'Master',      targetPace: '4:00' },
+  Master:      { rank: 'Grandmaster', targetPace: '3:30' },
+  Grandmaster: { rank: 'Challenger',  targetPace: '3:00' },
+};
+
+export function getNextRank(rank: RankType): { rank: RankType; targetPace: string } | null {
+  return nextRankThresholds[rank] ?? null;
+}
+
 // Main calculation function
 export function calculateRunResult(distanceKm: number, timeInput: string): RunResult | null {
   const timeMinutes = parseTime(timeInput);
