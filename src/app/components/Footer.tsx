@@ -67,7 +67,26 @@ const links = [
 
 export function Footer() {
   return (
-    <footer className="mt-10 border-t border-zinc-800 pt-6 pb-2">
+    <div className="mt-10 space-y-4">
+      {/* Certification banner */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-amber-400/[0.07] border border-amber-400/25 rounded-2xl px-5 py-4">
+        <span className="text-3xl flex-shrink-0">🎓</span>
+        <div className="flex-1">
+          <p className="text-amber-300 font-semibold text-[15px] mb-1">Envie de maîtriser Clever Cloud ?</p>
+          <p className="text-zinc-600 text-[13px] leading-relaxed">Validez vos compétences avec la certification officielle — et devenez expert de la plateforme.</p>
+        </div>
+        <a
+          href="https://academy.clever.cloud/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-zinc-900 font-bold text-[13px] px-4 py-2.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-amber-400/25 whitespace-nowrap flex-shrink-0"
+        >
+          Obtenir la certification →
+        </a>
+      </div>
+
+      {/* Footer links */}
+    <footer className="border-t border-zinc-800 pt-6 pb-2">
       <div className="flex flex-wrap gap-2 justify-center mb-3">
         {links.map((link) => (
           <a
@@ -86,5 +105,6 @@ export function Footer() {
         Open source demo &middot; Deployed on Clever Cloud
       </p>
     </footer>
+    </div>
   );
 }
