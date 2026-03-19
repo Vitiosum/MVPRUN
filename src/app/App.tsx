@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { DistanceSelector } from "./components/DistanceSelector";
 import { ResultCard } from "./components/ResultCard";
+import { Footer } from "./components/Footer";
 import { calculateRunResult } from "./utils/calculations";
 import { Trophy, AlertCircle } from "lucide-react";
 
@@ -175,6 +176,7 @@ export default function App() {
             <p className="text-center text-zinc-600 text-xs">
               Laisse les heures à 0 si tu cours moins d'1 heure
             </p>
+            <Footer />
           </div>
         ) : (
           <ResultCard
