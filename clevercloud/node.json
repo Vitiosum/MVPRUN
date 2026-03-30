@@ -1,0 +1,6 @@
+{
+  "deploy": {
+    "startupFile": "npm",
+    "args": "start"
+  }
+}
