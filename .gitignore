@@ -3,7 +3,8 @@
 **/.DS_Store
 
 # Build output
-#dist/
+# dist/ is intentionally NOT ignored — Vite builds directly to root (outDir: '.')
+# index.html and assets/ at root are the committed build artifacts
 build/
 
 # Dependencies

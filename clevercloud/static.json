@@ -1,5 +1,5 @@
 {
   "deploy": {
-    "webroot": "/dist"
+    "webroot": "/"
   }
 }
