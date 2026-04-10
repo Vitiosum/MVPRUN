@@ -49,13 +49,13 @@ export function RankBadge({ rank, size = "large" }: RankBadgeProps) {
     <div
       className="flex flex-col items-center gap-4 px-8 py-9 text-center"
       style={{
-        background: `radial-gradient(ellipse at 50% 0%, ${config.color}12 0%, transparent 65%)`,
+        background: `radial-gradient(ellipse at 50% 0%, ${config.color}14 0%, transparent 65%)`,
       }}
     >
       {/* Pulsing ring + emoji */}
       <div className="relative">
         <span
-          className="absolute inset-0 rounded-full animate-ping opacity-15"
+          className="absolute inset-0 rounded-full animate-ping opacity-12"
           style={{ background: config.color }}
         />
         <div
@@ -64,7 +64,7 @@ export function RankBadge({ rank, size = "large" }: RankBadgeProps) {
             width: 88, height: 88,
             background: `${config.color}18`,
             border: `1px solid ${config.color}35`,
-            boxShadow: `0 0 40px ${config.color}30`,
+            boxShadow: `0 0 40px ${config.color}28, 0 0 80px ${config.color}10`,
             fontSize: 40,
           }}
         >
@@ -72,20 +72,23 @@ export function RankBadge({ rank, size = "large" }: RankBadgeProps) {
         </div>
       </div>
 
-      {/* Rank name */}
+      {/* Rank name — Newsreader italic for editorial elegance */}
       <div>
         <h2
-          className="leading-none tracking-wider"
+          className="leading-none"
           style={{
             fontFamily: "var(--font-display)",
+            fontStyle: "italic",
             fontSize: 84,
+            fontWeight: 500,
             color: config.color,
-            textShadow: `0 0 40px ${config.color}45`,
+            textShadow: `0 0 40px ${config.color}40`,
+            letterSpacing: "-0.02em",
           }}
         >
           {rank}
         </h2>
-        <p className="mt-3 text-[13.5px]" style={{ color: "#4E5468" }}>
+        <p className="mt-3 text-[13.5px]" style={{ color: "hsl(0, 0%, 55%)", letterSpacing: "-0.01em" }}>
           {config.message}
         </p>
       </div>

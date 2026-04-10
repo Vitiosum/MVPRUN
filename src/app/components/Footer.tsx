@@ -1,3 +1,6 @@
+const BORDER    = "hsl(0, 0%, 20%)";
+const MUTED_DIM = "hsl(0, 0%, 25%)";
+
 const links = [
   {
     label: "clever-cloud.com",
@@ -25,7 +28,7 @@ const links = [
   {
     label: "Static on CC",
     href: "https://developers.clever-cloud.com/doc/applications/static/",
-    style: { color: "#4E5468", borderColor: "#1A1D26", background: "rgba(255,255,255,0.02)" },
+    style: { color: MUTED_DIM, borderColor: BORDER, background: "rgba(255,255,255,0.02)" },
     hoverBg: "rgba(255,255,255,0.04)",
     icon: (
       <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -37,7 +40,7 @@ const links = [
   {
     label: "React Docs",
     href: "https://react.dev",
-    style: { color: "#4E5468", borderColor: "#1A1D26", background: "rgba(255,255,255,0.02)" },
+    style: { color: MUTED_DIM, borderColor: BORDER, background: "rgba(255,255,255,0.02)" },
     hoverBg: "rgba(255,255,255,0.04)",
     icon: (
       <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -49,7 +52,7 @@ const links = [
   {
     label: "Vite Docs",
     href: "https://vitejs.dev",
-    style: { color: "#4E5468", borderColor: "#1A1D26", background: "rgba(255,255,255,0.02)" },
+    style: { color: MUTED_DIM, borderColor: BORDER, background: "rgba(255,255,255,0.02)" },
     hoverBg: "rgba(255,255,255,0.04)",
     icon: (
       <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -60,8 +63,8 @@ const links = [
   {
     label: "Certification Clever Cloud",
     href: "https://academy.clever.cloud/",
-    style: { color: "#F5C030", borderColor: "rgba(245,192,48,0.18)", background: "rgba(245,192,48,0.05)" },
-    hoverBg: "rgba(245,192,48,0.1)",
+    style: { color: "#F59E0B", borderColor: "rgba(245,158,11,0.18)", background: "rgba(245,158,11,0.05)" },
+    hoverBg: "rgba(245,158,11,0.1)",
     icon: (
       <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
@@ -78,16 +81,16 @@ export function Footer() {
       <div
         className="flex flex-col sm:flex-row items-start sm:items-center gap-4 rounded-2xl px-5 py-4"
         style={{
-          background: "rgba(251,191,36,0.055)",
-          border: "1px solid rgba(251,191,36,0.18)",
+          background: "rgba(245,158,11,0.05)",
+          border: "1px solid rgba(245,158,11,0.18)",
         }}
       >
         <span className="text-[26px] flex-shrink-0">🎓</span>
         <div className="flex-1">
-          <p className="font-semibold text-[14px] mb-1" style={{ color: "#F5C030" }}>
+          <p className="font-semibold text-[14px] mb-1" style={{ color: "#F59E0B", letterSpacing: "-0.02em" }}>
             Envie de maîtriser Clever Cloud ?
           </p>
-          <p className="text-[12.5px] leading-relaxed" style={{ color: "#5C5035" }}>
+          <p className="text-[12.5px] leading-relaxed" style={{ color: "hsl(0, 0%, 38%)" }}>
             Validez vos compétences avec la certification officielle — et devenez expert de la plateforme.
           </p>
         </div>
@@ -97,19 +100,20 @@ export function Footer() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 rounded-lg font-bold text-[12px] px-4 py-2.5 transition-all duration-150 whitespace-nowrap flex-shrink-0"
           style={{
-            background: "#F5C030",
+            background: "#F59E0B",
             color: "#1A1005",
             fontFamily: "var(--font-body)",
+            letterSpacing: "-0.01em",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#E8B428";
-            e.currentTarget.style.transform = "translateY(-1px)";
-            e.currentTarget.style.boxShadow = "0 4px 14px rgba(245,192,48,0.22)";
+            e.currentTarget.style.background  = "#E08E0A";
+            e.currentTarget.style.transform   = "translateY(-1px)";
+            e.currentTarget.style.boxShadow   = "0 4px 14px rgba(245,158,11,0.22)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = "#F5C030";
-            e.currentTarget.style.transform = "none";
-            e.currentTarget.style.boxShadow = "none";
+            e.currentTarget.style.background  = "#F59E0B";
+            e.currentTarget.style.transform   = "none";
+            e.currentTarget.style.boxShadow   = "none";
           }}
         >
           Obtenir la certification →
@@ -117,7 +121,7 @@ export function Footer() {
       </div>
 
       {/* Footer links */}
-      <footer className="pt-5 pb-2" style={{ borderTop: "1px solid #1A1D26" }}>
+      <footer className="pt-5 pb-2" style={{ borderTop: `1px solid ${BORDER}` }}>
         <div className="flex flex-wrap gap-1.5 justify-center mb-3">
           {links.map((link) => (
             <a
@@ -126,7 +130,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-md text-[11px] font-medium px-2.5 py-1.5 border transition-all duration-150"
-              style={{ ...link.style, fontFamily: "var(--font-body)" }}
+              style={{ ...link.style, fontFamily: "var(--font-body)", letterSpacing: "-0.01em" }}
               onMouseEnter={(e) => { e.currentTarget.style.background = link.hoverBg; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = link.style.background; }}
             >
@@ -135,7 +139,7 @@ export function Footer() {
             </a>
           ))}
         </div>
-        <p className="text-center text-[11px]" style={{ color: "#252830" }}>
+        <p className="text-center text-[11px]" style={{ color: "hsl(0, 0%, 22%)" }}>
           Open source demo &middot; Deployed on Clever Cloud
         </p>
       </footer>

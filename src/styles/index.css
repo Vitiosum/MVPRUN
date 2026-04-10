@@ -1,3 +1,116 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+
+/* ─── Nexus AI Platform ─────────────────────────────────── */
+
+@property --border-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes border-spin {
+  to { --border-angle: 360deg; }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Shiny CTA — spinning conic-gradient border + noise texture */
+.shiny-cta {
+  --border-angle: 0deg;
+  position: relative;
+  width: 100%;
+  padding: 2px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: conic-gradient(
+    from var(--border-angle),
+    hsl(0, 0%, 20%) 0%,
+    #3b82f6       20%,
+    #2563eb       35%,
+    hsl(0, 0%, 20%) 55%,
+    hsl(0, 0%, 20%) 80%,
+    #3b82f6       100%
+  );
+  animation: border-spin 4s linear infinite;
+  box-shadow:
+    0 0 30px rgba(59, 130, 246, 0.18),
+    0 4px 40px rgba(59, 130, 246, 0.08);
+  transition: box-shadow 0.3s ease, opacity 0.15s;
+}
+
+.shiny-cta:hover {
+  box-shadow:
+    0 0 40px rgba(59, 130, 246, 0.3),
+    0 4px 60px rgba(59, 130, 246, 0.15);
+}
+
+.shiny-cta:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.shiny-cta-inner {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  background: hsl(0, 0%, 12%);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: hsl(0, 0%, 98%);
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  transition: background 0.15s;
+}
+
+.shiny-cta:hover:not(:disabled) .shiny-cta-inner {
+  background: hsl(0, 0%, 14%);
+}
+
+.shiny-cta-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* Staggered entrance animations */
+.nx-animate {
+  animation: fadeSlideIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.nx-a1 { animation-delay: 0ms; }
+.nx-a2 { animation-delay: 70ms; }
+.nx-a3 { animation-delay: 140ms; }
+.nx-a4 { animation-delay: 210ms; }
+.nx-a5 { animation-delay: 280ms; }
+.nx-a6 { animation-delay: 350ms; }
+
+/* Number inputs — hide browser spinners */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] { -moz-appearance: textfield; }

@@ -4,13 +4,19 @@ import { RankBadge, RankType, rankConfigs } from "./RankBadge";
 import { getNextRank } from "../utils/calculations";
 
 interface ResultCardProps {
-  distance: string;
-  time: string;
-  pace: string;
+  distance:   string;
+  time:       string;
+  pace:       string;
   percentile: number;
-  rank: RankType;
-  onReset: () => void;
+  rank:       RankType;
+  onReset:    () => void;
 }
+
+const SURFACE   = "hsl(0, 0%, 11%)";
+const BORDER    = "hsl(0, 0%, 20%)";
+const TEXT      = "hsl(0, 0%, 98%)";
+const MUTED_DIM = "hsl(0, 0%, 28%)";
+const MUTED     = "hsl(0, 0%, 55%)";
 
 const distanceLabels: Record<string, string> = {
   "5":  "5 km",
@@ -22,8 +28,8 @@ const distanceLabels: Record<string, string> = {
 export function ResultCard({ distance, time, pace, percentile, rank, onReset }: ResultCardProps) {
   const [copied, setCopied] = useState(false);
 
-  const nextRankInfo = getNextRank(rank);
-  const rankColor = rankConfigs[rank].color;
+  const nextRankInfo   = getNextRank(rank);
+  const rankColor      = rankConfigs[rank].color;
   const progressPercent = 100 - percentile;
 
   const handleShare = () => {
@@ -37,11 +43,12 @@ export function ResultCard({ distance, time, pace, percentile, rank, onReset }: 
     }
   };
 
-  const cardStyle = { background: "#0C0E13", border: "1px solid #1A1D26" };
+  const cardStyle = { background: SURFACE, border: `1px solid ${BORDER}` };
+  const cardShadow = "0 2.8px 2.2px rgba(0,0,0,0.2), 0 6.7px 5.3px rgba(0,0,0,0.14), 0 22.3px 17.9px rgba(0,0,0,0.1)";
 
   return (
     <div
-      className="w-full space-y-2.5 animate-in fade-in slide-in-from-bottom-4 duration-700"
+      className="w-full space-y-2.5 nx-animate nx-a1"
       style={{ maxWidth: 460, margin: "0 auto" }}
     >
 
@@ -50,18 +57,19 @@ export function ResultCard({ distance, time, pace, percentile, rank, onReset }: 
         className="rounded-2xl overflow-hidden"
         style={{
           ...cardStyle,
-          borderTop: `3px solid ${rankColor}`,
+          boxShadow: cardShadow,
+          borderTop: `2px solid ${rankColor}55`,
         }}
       >
         <RankBadge rank={rank} size="large" />
       </div>
 
       {/* Percentile bar */}
-      <div className="rounded-2xl p-5 space-y-3" style={cardStyle}>
+      <div className="rounded-2xl p-5 space-y-3 nx-animate nx-a2" style={{ ...cardStyle, boxShadow: cardShadow }}>
         <div className="flex justify-between items-center">
           <span
             className="text-[10px] font-semibold uppercase tracking-[0.1em]"
-            style={{ color: "#4E5468" }}
+            style={{ color: MUTED_DIM }}
           >
             Position parmi les coureurs
           </span>
@@ -80,19 +88,19 @@ export function ResultCard({ distance, time, pace, percentile, rank, onReset }: 
             className="h-full rounded-full transition-all duration-1000 ease-out"
             style={{
               width: `${progressPercent}%`,
-              background: `linear-gradient(90deg, ${rankColor}50, ${rankColor})`,
-              boxShadow: `0 0 10px ${rankColor}40`,
+              background: `linear-gradient(90deg, ${rankColor}55, ${rankColor})`,
+              boxShadow: `0 0 8px ${rankColor}40`,
             }}
           />
         </div>
-        <div className="flex justify-between text-[10px]" style={{ color: "#4E5468", opacity: 0.6 }}>
+        <div className="flex justify-between text-[10px]" style={{ color: MUTED_DIM, opacity: 0.7 }}>
           <span>Iron</span>
           <span>Challenger</span>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 gap-2.5">
+      <div className="grid grid-cols-2 gap-2.5 nx-animate nx-a3">
         {[
           {
             icon: (
@@ -115,10 +123,10 @@ export function ResultCard({ distance, time, pace, percentile, rank, onReset }: 
             sub: "min / km",
           },
         ].map(({ icon, label, value, sub }) => (
-          <div key={label} className="rounded-2xl p-5 space-y-2.5" style={cardStyle}>
+          <div key={label} className="rounded-2xl p-5 space-y-2.5" style={{ ...cardStyle, boxShadow: cardShadow }}>
             <div
               className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.1em]"
-              style={{ color: "#4E5468" }}
+              style={{ color: MUTED_DIM }}
             >
               {icon}
               {label}
@@ -129,12 +137,13 @@ export function ResultCard({ distance, time, pace, percentile, rank, onReset }: 
                 fontFamily: "var(--font-mono)",
                 fontSize: 30,
                 fontWeight: 500,
-                color: "#E6E8F0",
+                color: TEXT,
+                letterSpacing: "-0.02em",
               }}
             >
               {value}
             </p>
-            <p className="text-[11px]" style={{ color: "#4E5468" }}>{sub}</p>
+            <p className="text-[11px]" style={{ color: MUTED }}>{sub}</p>
           </div>
         ))}
       </div>
@@ -142,13 +151,13 @@ export function ResultCard({ distance, time, pace, percentile, rank, onReset }: 
       {/* Next rank */}
       {nextRankInfo && (
         <div
-          className="rounded-2xl p-4 flex items-center justify-between"
-          style={cardStyle}
+          className="rounded-2xl p-4 flex items-center justify-between nx-animate nx-a4"
+          style={{ ...cardStyle, boxShadow: cardShadow }}
         >
           <div className="space-y-1.5">
             <p
               className="text-[10px] font-semibold uppercase tracking-[0.1em]"
-              style={{ color: "#4E5468" }}
+              style={{ color: MUTED_DIM }}
             >
               Prochain rang
             </p>
@@ -156,36 +165,37 @@ export function ResultCard({ distance, time, pace, percentile, rank, onReset }: 
               <span className="font-semibold text-sm" style={{ color: rankConfigs[nextRankInfo.rank].color }}>
                 {nextRankInfo.rank}
               </span>
-              <span style={{ color: "#4E5468" }}>›</span>
+              <span style={{ color: MUTED_DIM }}>›</span>
               <span
                 className="text-[13px]"
-                style={{ fontFamily: "var(--font-mono)", color: "#4E5468" }}
+                style={{ fontFamily: "var(--font-mono)", color: MUTED, letterSpacing: "-0.02em" }}
               >
                 pace &lt; {nextRankInfo.targetPace}/km
               </span>
             </div>
           </div>
-          <TrendingUp size={16} style={{ color: "#4E5468" }} />
+          <TrendingUp size={16} style={{ color: MUTED_DIM }} />
         </div>
       )}
 
       {/* Actions */}
-      <div className="grid grid-cols-2 gap-2.5 pt-1">
+      <div className="grid grid-cols-2 gap-2.5 pt-1 nx-animate nx-a5">
         <button
           onClick={handleShare}
           className="py-3.5 rounded-[10px] flex items-center justify-center gap-2 text-sm font-medium transition-all duration-150"
           style={{
-            background: "rgba(255,255,255,0.025)",
-            border: "1px solid #1A1D26",
-            color: "#E6E8F0",
+            background: "rgba(255,255,255,0.03)",
+            border: `1px solid ${BORDER}`,
+            color: TEXT,
+            letterSpacing: "-0.01em",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-            e.currentTarget.style.borderColor = "#252830";
+            e.currentTarget.style.background   = "rgba(255,255,255,0.06)";
+            e.currentTarget.style.borderColor  = "hsl(0, 0%, 26%)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.025)";
-            e.currentTarget.style.borderColor = "#1A1D26";
+            e.currentTarget.style.background  = "rgba(255,255,255,0.03)";
+            e.currentTarget.style.borderColor = BORDER;
           }}
         >
           {copied ? (
@@ -205,12 +215,13 @@ export function ResultCard({ distance, time, pace, percentile, rank, onReset }: 
           onClick={onReset}
           className="py-3.5 rounded-[10px] flex items-center justify-center gap-2 text-sm font-medium transition-all duration-150"
           style={{
-            background: `${rankColor}14`,
-            border: `1px solid ${rankColor}35`,
+            background: `${rankColor}12`,
+            border: `1px solid ${rankColor}32`,
             color: rankColor,
+            letterSpacing: "-0.01em",
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = `${rankColor}22`; }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = `${rankColor}14`; }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = `${rankColor}20`; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = `${rankColor}12`; }}
         >
           <RotateCcw size={14} />
           Recalculer
